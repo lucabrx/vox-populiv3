@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.scrollbar-w-2::-webkit-scrollbar {
+    width: 0.25rem;
+    height: 0.25rem;
+  }
+  
+  .scrollbar-track-blue-lighter::-webkit-scrollbar-track {
+    --bg-opacity: 1;
+    background-color: #f7fafc;
+    background-color: rgba(247, 250, 252, var(--bg-opacity));
+  }
+  
+  .scrollbar-thumb-blue::-webkit-scrollbar-thumb {
+    --bg-opacity: 1;
+    background-color: #edf2f7;
+    background-color: rgba(237, 242, 247, var(--bg-opacity));
+  }
+  
+  .scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
+    border-radius: 0.25rem;
+  }
+
+  .rc-md-editor {
+  width: 100%;
+}
+
+.rc-md-navigation {
+  @apply rounded-t-[20px];
+}
+
+// MD Editor styling adjustments.
+.rc-md-editor {
+  width: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+  @apply dark:border-neutral-800;
+
+  .sec-html {
+    border: none !important;
+  }
+
+  .sec-md textarea {
+    overflow-y: auto !important;
+  }
+}
+
+// Create new tailwind class for MD editor dark-mode styles.
+@layer utilities {
+  .base-scrollbar {
+    @apply scrollbar-thin scrollbar-track-transparent dark:scrollbar-track-transparent;
+  }
+
+  .grey-scrollbar {
+    @apply base-scrollbar scrollbar-thumb-neutral-300 dark:scrollbar-thumb-neutral-800;
+  }
+
+  .content-mask {
+    -webkit-mask-image: linear-gradient(180deg, #000 71%, transparent);
+    mask-image: linear-gradient(180deg, #000 71%, transparent);
+  }
+
+  .md-dark-mode {
+    @apply bg-zinc-900;
+
+    .editor-container {
+      .sec-md {
+        @apply border-r border-neutral-800;
+
+        @media (max-width: 425px) {
+          @apply border-b border-neutral-800;
+        }
+      }
+
+      .sec-md textarea {
+        @apply bg-zinc-900 text-neutral-100;
+      }
+    }
+
+    .rc-md-navigation {
+      @apply border-none bg-zinc-800 text-zinc-100;
+
+      .button:hover {
+        color: theme("colors.neutral.300") !important;
+      }
+    }
+  }
+}
+
+#nprogress .bar {
+  height: 3px !important;
+}
+
+.prose {
+  input[type="checkbox"] {
+    @apply mb-0 mt-0;
+  }
+}
