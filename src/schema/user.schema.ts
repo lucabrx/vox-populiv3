@@ -27,3 +27,12 @@ export const UserChangePaswordSchema = z.object({
     userId: z.string(),
 })
 export type UserChangePaswordType = TypeOf<typeof UserChangePaswordSchema>
+
+export const EditUserSchema = z.object({
+    userId: z.string(),
+    name: z.string().min(2, "Minimal 2 character long").max(100, "Maximal 100 character long"),
+    bio: z.any().optional(),
+    page: z.any().optional(),
+})
+
+export type EditUserType = TypeOf<typeof EditUserSchema>

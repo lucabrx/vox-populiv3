@@ -3,6 +3,7 @@ import Image from 'next/image';
 import UserMenu from './UserMenu';
 import ShouldRender from '../helpers/ShouldRender';
 import ChangePasswordModal from '../modals/ChangePasswordModal';
+import EditUserModal from '../modals/EditUserModal';
 
 
 interface UserCoverProps {
@@ -51,6 +52,7 @@ className='text-my-primary-500  text-sm md:text-base hover:underline'
 >{data?.page}</a>
 </ShouldRender>
 
+<EditUserModal session={data} />
 <ChangePasswordModal session={data} />
 </div>
 </div>

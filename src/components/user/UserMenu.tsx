@@ -3,11 +3,10 @@ import { useState, type FC, useRef } from 'react';
 import IconContainer from '../ui/IconContainer';
 import { Key, Settings, UserCog } from 'lucide-react';
 import Button from '../ui/Button';
-
 import { useClickOutside } from '@/hooks/useClickOutside';
 import useLockOverflow from '@/hooks/useLockOverlfow';
 import useChangePasswordModal from '@/hooks/useChangePasswordModal';
-import ChangePasswordModal from '../modals/ChangePasswordModal';
+import useEditUser from '@/hooks/useEditUser';
 
 interface UserMenuProps {
 }
@@ -16,12 +15,17 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
  const [showMenu, setShowMenu] = useState(false);
  const userMenuRef = useRef<HTMLDivElement>(null);
 const passwordModal = useChangePasswordModal();
+const editModal = useEditUser();
 
 function openPasswordModal() {
   setShowMenu(false)
   passwordModal.onOpen()
 }
 
+function openEditModal() {
+  setShowMenu(false)
+  editModal.onOpen()
+}
 
 
 useLockOverflow(showMenu)
@@ -44,6 +48,7 @@ min-w-[250px] w-full'>
 
 
 <Button 
+onClick={openEditModal}
 art="ghost" 
 className='flex justify-between gap-3 items-center w-full'>
 <IconContainer art="solid">
