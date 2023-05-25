@@ -7,12 +7,13 @@ import SidebarBody from '../sidebar/SidebarBody';
 
 interface MbMenuProps {
   disableAction: () => void;
+  session: SafeSession | null;
 }
 
 
 
 
-const MobSidebar = forwardRef<HTMLDivElement,MbMenuProps>(({disableAction},ref) => {
+const MobSidebar = forwardRef<HTMLDivElement,MbMenuProps>(({disableAction,session},ref) => {
   return (
 <div  ref={ref} className='absolute right-0 top-0 shadow-sm border-l border-my-neutral-200/30 dark:border-my-neutral-700/50 w-[300px] h-screen z-10 bg-my-neutral-50 dark:bg-my-neutral-950 px-2'> 
 <IconContainer 
@@ -23,7 +24,7 @@ className='absolute top-2 right-2'>
 
 <div className='w-full h-full mt-12 flex flex-col justify-start'>
 
-<SidebarBody />
+<SidebarBody session={session} />
 
 </div>
 </div>

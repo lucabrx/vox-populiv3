@@ -25,7 +25,7 @@ const Navbar: FC<NavbarProps> = ({session}) => {
   <Logo />
 </div>
 
-<MobileNavbarItems />
+<MobileNavbarItems session={session} />
 
 <div className="hidden px0:flex gap-2 justify-center items-center">
   <SearchInput />

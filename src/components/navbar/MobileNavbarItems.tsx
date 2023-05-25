@@ -12,10 +12,10 @@ import MobSidebar from './MobSidebar';
 import  useLoginModal  from '@/hooks/useLoginModal';
 
 interface MobileNavbarItemsProps {
-  
+  session: SafeSession | null;
 }
 
-const MobileNavbarItems: FC<MobileNavbarItemsProps> = ({}) => {
+const MobileNavbarItems: FC<MobileNavbarItemsProps> = ({session}) => {
   const [openMenu, setOpenMenu] = useState(false)
   const { setTheme, resolvedTheme } = useTheme()
   const menuRef = useRef<HTMLDivElement>(null);
@@ -56,6 +56,7 @@ onClick={() => setOpenMenu(true)}>
 <ShouldRender if={openMenu}>
  
       <MobSidebar 
+      session={session}
       disableAction={() => setOpenMenu(false)}
       ref={menuRef} />
 </ShouldRender>
