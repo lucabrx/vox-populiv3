@@ -5,22 +5,23 @@ import IconContainer from '../ui/IconContainer';
 import { Edit, Edit2, Trash } from 'lucide-react';
 import Button from '../ui/Button';
 import ShouldRender from '../helpers/ShouldRender';
-import useDeleteNewsModal from '@/hooks/useDeleteNews';
 import useLockOverflow from '@/hooks/useLockOverlfow';
 import { useClickOutside } from '@/hooks/useClickOutside';
-import useEditNews from '@/hooks/useEditNews';
-import DeleteNewsModal from '../modals/DeleteNewsModal';
-import EditNewsText from './EditNewsText';
+import useDeleteStory from '@/hooks/useDeleteStory';
+import useEditStory from '@/hooks/useEditStory';
+import DeleteStoryModal from '../modals/DeleteStoryModal';
+import EditStoryText from './EditStoryText';
 
-interface EditNewsProps {
+
+interface EditStoryProps {
   data: NewsType | null
 }
 
-const EditNews: FC<EditNewsProps> = ({data}) => {
+const EditStory: FC<EditStoryProps> = ({data}) => {
     const [menu, setMenu] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
-    const deleteModal = useDeleteNewsModal()
-    const editNews = useEditNews();
+    const deleteModal = useDeleteStory()
+    const editStory = useEditStory();
     useLockOverflow(menu)
     useClickOutside(menuRef, () => setMenu(false))
 
@@ -30,15 +31,15 @@ const EditNews: FC<EditNewsProps> = ({data}) => {
     }
     
     const openEditBlog = () => {
-        editNews.open()
+        editStory.open()
         setMenu(false)
     }
   return (
 <>
-<DeleteNewsModal params={data?.id!}  />
-<EditNewsText  newsData={data!} />
+<DeleteStoryModal params={data?.id!}  />
+<EditStoryText  storyData={data!} />
 
-<ShouldRender if={!editNews.isOpen}>
+<ShouldRender if={!editStory.isOpen}>
 <IconContainer 
 onClick={() => setMenu(!menu)}
 className='absolute right-2 top-2 cursor-pointer'> 
@@ -83,4 +84,4 @@ className='flex justify-between gap-3 items-center w-full bg-z'>
 )
 }
 
-export default EditNews
+export default EditStory

@@ -19,7 +19,6 @@
 
 ## 4. TODO
 - [ ] Add Comments,Delete Comments, Read Comments, Edit Comments
-- [ ] Add Post to User Page 
-- [ ] Add Write News Page
-- [ ] Add Write Story Page
-- [ ] Add Category from News and Stories
+- [ ] Add Blog to User Page 
+- [ ] Mobile Menu to close when we select link
+- [ ] Add a news and story categories and sort it by categories

@@ -12,11 +12,11 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { nanoid } from 'nanoid';
 
-interface WriteNewsProps {
+interface WriteStoryProps {
   
 }
 
-const WriteNews: FC<WriteNewsProps> = ({}) => {
+const WriteStory: FC<WriteStoryProps> = ({}) => {
     const queryClient = useQueryClient()
     const router = useRouter()
 
@@ -24,30 +24,30 @@ const WriteNews: FC<WriteNewsProps> = ({}) => {
         resolver: zodResolver(CreateNewsSchema),
     })
 
-    const createNews = useMutation({
-        mutationFn: (data: CreateNewsType) => axios.post("/api/news/create-news", data),
+    const createStory = useMutation({
+        mutationFn: (data: CreateNewsType) => axios.post("/api/story/create-news", data),
         onSuccess: () => {
-            toast.success("Create news successfully")
+            toast.success("Create story successfully")
             reset()
             // TODO when fetch all news
             // queryClient.invalidateQueries({ }) 
         },
         onError: () => {
-            toast.error("Create news failed")
+            toast.error("Create story failed")
         },
         onSettled: (data,err,variables) => {
-            router.push(`/news/${variables.id}`)
+            router.push(`/story/${variables.id}`)
          }
     })
 
     useEffect(() => {
         setValue("id", nanoid())
-      }, [createNews,setValue,reset])
+      }, [createStory,setValue,reset])
 
    
 
     const onSubmit = (values: CreateNewsType) => {
-        createNews.mutate(values)
+        createStory.mutate(values)
     }
   return (
     <form 
@@ -60,7 +60,7 @@ const WriteNews: FC<WriteNewsProps> = ({}) => {
        <input 
           {...register('title')}
         type="text"
-        placeholder="News title"
+        placeholder="Story title"
        className='w-full rounded-md  bg-zinc-300/30 dark:bg-zinc-700/30 py-2 px-4 flex outline-none focus:ring-1 focus:ring-my-primary-500' />
     </Field>
 
@@ -80,10 +80,9 @@ const WriteNews: FC<WriteNewsProps> = ({}) => {
     </label> 
    <select 
    className='p-2 rounded-md bg-zinc-300/30 dark:bg-zinc-700/30 py-2 px-4 flex outline-none focus:ring-1 focus:ring-my-primary-500' {...register("category")}>
-        <option value="Tech">Tech</option>
-        <option value="Sport">Sport</option>
-        <option value="World">World</option>
-        <option value="Lifestyle">Lifestyle</option>
+        <option value="Tech">Story of the Month</option>
+        <option value="Sport">Person of the Month</option>
+        <option value="World">Country of the Month</option>
     </select>
    </Field>
  
@@ -100,4 +99,4 @@ const WriteNews: FC<WriteNewsProps> = ({}) => {
 )
 }
 
-export default WriteNews
+export default WriteStory

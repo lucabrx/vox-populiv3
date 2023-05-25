@@ -1,6 +1,6 @@
 "use client"
 import { type FC } from 'react';
-import { Home, Newspaper, Pen, User } from 'lucide-react';
+import { Home, MenuSquare, Newspaper, Pen, User } from 'lucide-react';
 import NavigationLink from '../ui/NavigationLink';
 import ActionLink from '../ui/ActionLink';
 import ShouldRender from '../helpers/ShouldRender';
@@ -59,6 +59,11 @@ const SidebarBody: FC<BodyTopProps> = ({session}) => {
         icon={Newspaper}
         title='Create News'
         path='/news/new'
+    /> 
+     <ActionLink 
+        icon={MenuSquare}
+        title='Create Story'
+        path='/story/new'
     /> 
     </ShouldRender>
   

@@ -13,23 +13,23 @@ import Button from '../ui/Button';
 import IconContainer from '../ui/IconContainer';
 import { X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import useEditNews from '@/hooks/useEditNews';
-import { EditNewsSchema, EditNewsType } from '@/schema/news.schema';
+import useEditStory from '@/hooks/useEditStory';
+import { EditStorySchema, EditStoryType } from '@/schema/story.schema';
 
 interface EditNewsTextProps {
-    newsData?: Blog;
+    storyData?: Blog;
 }
 
-const EditNewsText: FC<EditNewsTextProps> = ({newsData}) => {
-    const editNews = useEditNews();
+const EditStoryText: FC<EditNewsTextProps> = ({storyData}) => {
+    const editStory = useEditStory();
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
-    const {watch,register,handleSubmit,formState:{errors},reset,control} = useForm<EditNewsType>({
-        resolver: zodResolver(EditNewsSchema),
+    const {watch,register,handleSubmit,formState:{errors},reset,control} = useForm<EditStoryType>({
+        resolver: zodResolver(EditStorySchema),
         defaultValues: {
-          body: newsData?.body,
-         title: newsData?.title,
-         description: newsData?.description,
+          body: storyData?.body,
+         title: storyData?.title,
+         description: storyData?.description,
         }
     })
 
@@ -40,12 +40,12 @@ const EditNewsText: FC<EditNewsTextProps> = ({newsData}) => {
     const shouldBlockUserFromUpdating =
       !watchBody ||
       !watchTitle ||
-      (watchTitle === newsData?.title && watchBody === newsData?.body && watchDescription === newsData?.description);
+      (watchTitle === storyData?.title && watchBody === storyData?.body && watchDescription === storyData?.description);
   
 
     const editNewsText = useMutation({
-        mutationFn: (data: EditNewsType) => 
-        axios.post(`/api/news/${newsData?.id!}` , data),
+        mutationFn: (data: EditStoryType) => 
+        axios.post(`/api/story/${storyData?.id!}` , data),
         onSuccess: () => {
             toast.success("Edited news successfully")
             reset()
@@ -58,13 +58,13 @@ const EditNewsText: FC<EditNewsTextProps> = ({newsData}) => {
         },
         onSettled: () => {
             setIsLoading(false);
-            editNews.close() 
+            editStory.close() 
            
         }
     
     })
 
-    const submitEvent: SubmitHandler<EditNewsType> = useCallback((data) => {
+    const submitEvent: SubmitHandler<EditStoryType> = useCallback((data) => {
         setIsLoading(true);
         editNewsText.mutate({
             ...data,
@@ -75,13 +75,13 @@ const EditNewsText: FC<EditNewsTextProps> = ({newsData}) => {
 
 
   return (
-    <ShouldRender if={editNews.isOpen}>
+    <ShouldRender if={editStory.isOpen}>
 <form
 className='relative py-4 space-y-2 border-b border-my-neutral-200 dark:border-my-neutral-700'
 onSubmit={handleSubmit(submitEvent)}>
 <IconContainer
 className='absolute top-5 right-0 cursor-pointer'
-onClick={editNews.close}
+onClick={editStory.close}
 >
     <X />
 </IconContainer>
@@ -136,7 +136,7 @@ onClick={editNews.close}
 
    <div className='flex justify-end items-center gap-2 py-2'>
     <Button
-    onClick={editNews.close}
+    onClick={editStory.close}
     disabled={isLoading}
     className='min-w-[100px]' art="ghost">Cancel</Button>
     <Button 
@@ -150,4 +150,4 @@ onClick={editNews.close}
 )
 }
 
-export default EditNewsText
+export default EditStoryText

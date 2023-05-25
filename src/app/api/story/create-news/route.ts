@@ -1,19 +1,19 @@
-import { News } from "@/db/";
+import { Story } from "@/db";
 import { getCurrentSession } from "@/fetching-hooks/getSession";
 import { db } from "@/lib/db";
-import { CreateNewsType } from "@/schema/news.schema";
-import { NextRequest, NextResponse } from "next/server";
+import { CreateStoryType } from "@/schema/story.schema";
+import { NextResponse } from "next/server";
 
 
-export async function POST(request: NextRequest) {
-    const newNews: CreateNewsType = await request.json()
-    const {body,category,description,id,title} = newNews
+export async function POST(request: Request) {
+    const storyBody: CreateStoryType = await request.json();
+    const { body, title, description, category, id } = storyBody;
+    const currentUser = await getCurrentSession()
 
     if(!body || !category || !description || !id || !title){
         return NextResponse.json({message: "All fields are required"}, {status: 400})
     }
 
-    const currentUser = await getCurrentSession()
     if(!currentUser){
         return NextResponse.json({message: "You are not logged in"}, {status: 401})
     }
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     }
     
     const news = await db
-    .insert(News)
+    .insert(Story)
     .values({
         id,
         title,
@@ -33,7 +33,6 @@ export async function POST(request: NextRequest) {
     })
 
     return NextResponse.json({
-        message: "News created successfully",
+        message: "Story created successfully",
     })
-
 }

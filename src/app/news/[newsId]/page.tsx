@@ -5,10 +5,10 @@ import { getCurrentSession } from "@/fetching-hooks/getSession";
 interface IParams {
     newsId?: string;
   }
-  interface BlogProps {
+  interface NewsProps {
       params: IParams;
       }
-export default async function News({params}: BlogProps) {
+export default async function News({params}: NewsProps) {
     const session = await getCurrentSession()
     const news = await getNews(params.newsId!)
 

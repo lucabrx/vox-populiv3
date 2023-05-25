@@ -1,6 +1,6 @@
 import {z, TypeOf} from 'zod';
 
-export const CreateNewsSchema = z.object({
+export const CreateStorySchema = z.object({
     id: z.string(),
     title: 
     z.string()
@@ -18,10 +18,9 @@ export const CreateNewsSchema = z.object({
     z.string()
     .min(300, "Minimal 100 characters long"),
  })
-export type CreateNewsType = TypeOf<typeof CreateNewsSchema>
+export type CreateStoryType = TypeOf<typeof CreateStorySchema>
 
-
-export const EditNewsSchema = z.object({
+export const EditStorySchema = z.object({
     title: 
     z.string()
     .min(25, "Minimal 25 characters long")
@@ -42,4 +41,5 @@ export const EditNewsSchema = z.object({
     .min(300, "Minimal 100 characters long")
     .optional()
  })
-export type EditNewsType = TypeOf<typeof EditNewsSchema>
+export type EditStoryType = TypeOf<typeof EditStorySchema>
+
