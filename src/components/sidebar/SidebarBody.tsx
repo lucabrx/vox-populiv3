@@ -1,13 +1,12 @@
 "use client"
 import { type FC } from 'react';
-
-
-import { Home, Pen, User } from 'lucide-react';
+import { Home, Newspaper, Pen, User } from 'lucide-react';
 import NavigationLink from '../ui/NavigationLink';
 import ActionLink from '../ui/ActionLink';
+import ShouldRender from '../helpers/ShouldRender';
 
 interface BodyTopProps {
-  
+  session : SafeSession | null;
 }
 
 const navigationLink = [
@@ -27,11 +26,11 @@ const actionLink = [
     {
         icon: Pen,
         title: 'Create Blog',
-        path: '/blog/new'
+        path: '/blog/new',
     }
 ]
 
-const SidebarBody: FC<BodyTopProps> = ({}) => {
+const SidebarBody: FC<BodyTopProps> = ({session}) => {
   return (
 <div className='flex flex-col  w-full h-full pt-2  px-4 border-my-neutral-200/30  dark:border-my-neutral-700/50 dark:border-t-[1px] pb-1 '> 
 <h2 className='text-xl rounded-md dark:text-my-neutral-50 text-my-neutral-950 font-semibold px-2 '>Navigation</h2>
@@ -54,6 +53,16 @@ const SidebarBody: FC<BodyTopProps> = ({}) => {
         path={link.path}
         />
     ))}
+    
+   <ShouldRender if={session?.role === 'NewsEditor' }>
+   <ActionLink 
+        icon={Newspaper}
+        title='Create News'
+        path='/news/new'
+    /> 
+    </ShouldRender>
+  
+
 </div>
 </div>
 )

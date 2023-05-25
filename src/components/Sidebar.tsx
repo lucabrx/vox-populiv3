@@ -15,7 +15,7 @@ const Sidebar: FC<SidebarProps> = ({session}) => {
 <div className='py-[16px] shadow-sm w-full flex justify-center'>
 <Logo />
 </div>
-<SidebarBody />
+<SidebarBody session={session} />
 
 <SidebarFooterTop session={session} />
 <SidebarFooter session={session} />

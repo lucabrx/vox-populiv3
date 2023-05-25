@@ -29,6 +29,7 @@ const WriteBlog: FC<WriteBlogProps> = ({}) => {
         onSuccess: (data,variables) => {
             toast.success("Create blog successfully")
             reset()
+            // TODO when fetch all blogs
             queryClient.invalidateQueries({
                 queryKey: ["latest-blogs"],
             })

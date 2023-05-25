@@ -18,6 +18,8 @@
 - [ ] User can register multiple emails it wont be senden to the database but it wont send an error either.
 
 ## 4. TODO
-- [ ] Edit bio,page,username 
-- [ ] Change password 
 - [ ] Add Comments,Delete Comments, Read Comments, Edit Comments
+- [ ] Add Post to User Page 
+- [ ] Add Write News Page
+- [ ] Add Write Story Page
+- [ ] Add Category from News and Stories

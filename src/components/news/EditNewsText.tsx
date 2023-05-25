@@ -1,4 +1,5 @@
 "use client"
+
 import {  type FC, useState, useCallback } from 'react';
 import { EditBLogSchema, EditBlogType } from '@/schema/blog.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,21 +15,23 @@ import IconContainer from '../ui/IconContainer';
 import { X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import useEditBlog from '@/hooks/useEditBlog';
+import useEditNews from '@/hooks/useEditNews';
+import { EditNewsSchema, EditNewsType } from '@/schema/news.schema';
 
-interface EditBlogModalProps {
-  blogData?: Blog;
+interface EditNewsTextProps {
+    newsData?: Blog;
 }
 
-const EditBlogText: FC<EditBlogModalProps> = ({blogData}) => {
-    const editBlog = useEditBlog();
+const EditNewsText: FC<EditNewsTextProps> = ({newsData}) => {
+    const editNews = useEditNews();
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
-    const {watch,register,handleSubmit,formState:{errors},reset,control} = useForm<EditBlogType>({
-        resolver: zodResolver(EditBLogSchema),
+    const {watch,register,handleSubmit,formState:{errors},reset,control} = useForm<EditNewsType>({
+        resolver: zodResolver(EditNewsSchema),
         defaultValues: {
-          body: blogData?.body,
-         title: blogData?.title,
-         description: blogData?.description
+          body: newsData?.body,
+         title: newsData?.title,
+         description: newsData?.description,
         }
     })
 
@@ -39,14 +42,14 @@ const EditBlogText: FC<EditBlogModalProps> = ({blogData}) => {
     const shouldBlockUserFromUpdating =
       !watchBody ||
       !watchTitle ||
-      (watchTitle === blogData?.title && watchBody === blogData?.body && watchDescription === blogData?.description);
+      (watchTitle === newsData?.title && watchBody === newsData?.body && watchDescription === newsData?.description);
   
 
-    const editBlogMutation = useMutation({
-        mutationFn: (data: EditBlogType) => 
-        axios.post(`/api/blog/${blogData?.id!}` , data),
+    const editNewsText = useMutation({
+        mutationFn: (data: EditNewsType) => 
+        axios.post(`/api/news/${newsData?.id!}` , data),
         onSuccess: () => {
-            toast.success("Edited blog successfully")
+            toast.success("Edited news successfully")
             reset()
             router.refresh()
            
@@ -57,32 +60,30 @@ const EditBlogText: FC<EditBlogModalProps> = ({blogData}) => {
         },
         onSettled: () => {
             setIsLoading(false);
-            editBlog.close() 
+            editNews.close() 
            
         }
     
     })
 
-    const submitEvent: SubmitHandler<EditBlogType> = useCallback((data) => {
+    const submitEvent: SubmitHandler<EditNewsType> = useCallback((data) => {
         setIsLoading(true);
-        editBlogMutation.mutate({
-            body: data.body,
-            title: data.title,
-            description: data.description
+        editNewsText.mutate({
+            ...data,
     })
 
     router.refresh()
-    }, [editBlogMutation,setIsLoading,router])
+    }, [editNewsText,setIsLoading,router])
 
 
   return (
-    <ShouldRender if={editBlog.isOpen}>
+    <ShouldRender if={editNews.isOpen}>
 <form
 className='relative py-4 space-y-2 border-b border-my-neutral-200 dark:border-my-neutral-700'
 onSubmit={handleSubmit(submitEvent)}>
 <IconContainer
 className='absolute top-5 right-0 cursor-pointer'
-onClick={editBlog.close}
+onClick={editNews.close}
 >
     <X />
 </IconContainer>
@@ -112,6 +113,19 @@ onClick={editBlog.close}
        <p className="text-red-500 text-sm">{errors.description?.message}</p>
    </ShouldRender>
    </Field>
+   <Field error={errors.category}>
+   <select 
+   className='p-2 rounded-md bg-zinc-300/30 dark:bg-zinc-700/30 py-2 px-4 flex outline-none focus:ring-1 focus:ring-my-primary-500' {...register("category")}>
+        <option value="Tech">Tech</option>
+        <option value="Sport">Sport</option>
+        <option value="World">World</option>
+        <option value="Lifestyle">Lifestyle</option>
+    </select>
+
+    <ShouldRender if={errors.category}>
+        <p className="text-red-500 text-sm">{errors.category?.message}</p>
+    </ShouldRender>
+   </Field>
    <Field>
    <label className='text-my-neutral-950 dark:text-my-neutral-50 font-semibold'>
    Body
@@ -124,7 +138,7 @@ onClick={editBlog.close}
 
    <div className='flex justify-end items-center gap-2 py-2'>
     <Button
-    onClick={editBlog.close}
+    onClick={editNews.close}
     disabled={isLoading}
     className='min-w-[100px]' art="ghost">Cancel</Button>
     <Button 
@@ -138,4 +152,4 @@ onClick={editBlog.close}
 )
 }
 
-export default EditBlogText
+export default EditNewsText

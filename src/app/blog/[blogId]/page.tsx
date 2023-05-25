@@ -16,13 +16,11 @@ export default async function Blog({params}: BlogProps) {
  
     
     return (
-        <div className="w-full pb-4 pt-3 relative  max-w-[800px]">
           <div className="w-full pb-4 pt-3 relative  max-w-[800px]">
           <SingleBlogPage 
           blog={blog}
           session={session}
            />
-        </div>
         </div>
     )
 }
