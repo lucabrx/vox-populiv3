@@ -17,6 +17,7 @@ if(category === "all" ) {
     const allNews = await db
     .select()
     .from(News)
+    .offset(Number(offset) - 1)
     .offset(Number(offset))
     .limit(Number(limit))
     .innerJoin(User, eq(User.id,News.userId))
@@ -31,7 +32,8 @@ const news = await db
 .innerJoin(User, eq(User.id,News.userId))
 .where(eq(News.category, category))
 .orderBy(desc(News.created_at))
-
+.offset(Number(offset))
+.limit(Number(limit))
 
 return NextResponse.json(news)
 }

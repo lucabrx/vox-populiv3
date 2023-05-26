@@ -7,10 +7,7 @@ import NewsCard from '../ui/NewsCard';
 import SkeletonPost from '../ui/SkeletonPost';
 import { useRouter } from 'next/navigation';
 
-type ApiResponse = {
-  data: SafeNews[];
-  nextPage: number;
-};
+
 
 
 const NewsHome: FC = ({}) => {
@@ -18,13 +15,13 @@ const NewsHome: FC = ({}) => {
     const queryClient = useQueryClient()
     const querykey = ['news', category]
     const router = useRouter()
-    const fetchNews = useCallback(async ({pageParam = 0}): Promise<ApiResponse> => {
+    const fetchNews = useCallback(async ({pageParam = 0}) => {
         try {
-          const response = await axios.get<ApiResponse>("/api/news/get-news", {
+          const response = await axios.get("/api/news/get-news", {
             params: {
               category: category,
               offset: pageParam,
-              limit: 10
+              limit: 1
             },
           });
           return response.data;
@@ -34,13 +31,13 @@ const NewsHome: FC = ({}) => {
         }
       }, [category]);
 
-    const {data, isLoading,fetchNextPage, hasNextPage, isFetchingNextPage} = useInfiniteQuery<ApiResponse>({
+    const {data, isLoading,fetchNextPage, hasNextPage, isFetchingNextPage} = useInfiniteQuery<SafeNews[]>({
         queryKey: querykey,
         queryFn: fetchNews,
-        getNextPageParam: (lastPage,allPages) => {
-          getNextPageParam: (lastPage) => lastPage.nextPage
-
-        }
+        getNextPageParam: (lastPage, allPages) => {
+          const lastPageLength = lastPage.length;
+          return lastPageLength > 0 ? allPages.length * 1 : undefined;
+        },
         
     })
 
@@ -86,7 +83,7 @@ const NewsHome: FC = ({}) => {
 
     {data?.pages?.map((page, pageIndex) => (
       <Fragment key={pageIndex}>
-                {page?.data?.map((news) => (
+        {page?.map((news) => (
     <NewsCard key={news.News.id} data={news} />
     ))}
     </Fragment>
