@@ -19,7 +19,7 @@ const Navbar: FC<NavbarProps> = ({session}) => {
   return (
     <>
 <div className='w-full flex justify-center border-b border-my-neutral-200/30 dark:border-my-neutral-700/50 bg-my-neutral-50 dark:bg-my-neutral-950 md:shadow-sm'> 
-<div className="pc:max-w-[1128px] max-w-[1128px] lpc:ml-0 px0:ml-[200px] px0:max-w-[1116px] px-4 py-3 flex justify-between px0:justify-end items-center px0:px-0 w-full ">
+<div className="pc:max-w-[1128px] max-w-[1128px] lpc:ml-0 px0:ml-[200px] px0:max-w-[1166px] px-4 py-3  flex justify-between px0:justify-end items-center  w-full px0:px-4 pc:px-0">
 
 <div className='px0:hidden'>
   <Logo />

@@ -1,3 +1,4 @@
+import { InferModel } from 'drizzle-orm';
 import {  mysqlTable, timestamp, uniqueIndex, varchar } from 'drizzle-orm/mysql-core'
 
 export const User = mysqlTable(
@@ -21,3 +22,4 @@ export const User = mysqlTable(
    }),
  );
 
+ export type UserType = InferModel<typeof User, "select">;

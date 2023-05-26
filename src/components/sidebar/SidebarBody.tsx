@@ -16,6 +16,11 @@ const navigationLink = [
         title: 'Home'
     },
     {
+        path: '/news',
+        icon: Newspaper,
+        title: 'News'
+    },
+    {
         path: '/user',
         icon: User,
         title: 'Profile'
