@@ -1,11 +1,12 @@
 "use client"
 import { SafeNews } from '@/types/joinedNews';
-import { useQuery, useQueryClient, useInfiniteQuery } from '@tanstack/react-query';
+import {  useQueryClient, useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useState, type FC, useCallback, useEffect, Fragment } from 'react';
+import { useState, type FC, useCallback, Fragment } from 'react';
 import NewsCard from '../ui/NewsCard';
 import SkeletonPost from '../ui/SkeletonPost';
-import { useRouter } from 'next/navigation';
+import ShouldRender from '../helpers/ShouldRender';
+import Button from '../ui/Button';
 
 
 
@@ -14,7 +15,7 @@ const NewsHome: FC = ({}) => {
     const [category,setCategory] = useState('all')
     const queryClient = useQueryClient()
     const querykey = ['news', category]
-    const router = useRouter()
+
     const fetchNews = useCallback(async ({pageParam = 0}) => {
         try {
           const response = await axios.get("/api/news/get-news", {
@@ -62,7 +63,7 @@ const NewsHome: FC = ({}) => {
 
   
   return (
-    <div className="flex flex-col w-full pb-4 md:pt-3 justify-center items-center ">
+    <div className="flex flex-col w-full pb-4 md:pt-3 justify-center items-center">
         <div className='flex w-full justify-center  items-center gap-2  px-4 mt-2'>
             <button onClick={() => handleClick("all")} className={`px-2 py-1 rounded-md text-sm font-semibold ${category === 'all' ? 'bg-neutral-300 text-my-neutral-950' : 'text-my-neutral-700  dark:text-my-neutral-50'}`}>All</button>
 
@@ -88,12 +89,17 @@ const NewsHome: FC = ({}) => {
     ))}
     </Fragment>
     ))}
-{hasNextPage && (
-      <button onClick={handleLoadMore} disabled={isFetchingNextPage}>
-        {isFetchingNextPage ? 'Loading more...' : 'Load More'}
-      </button>
-    )}
+
 </div>
+<ShouldRender if={hasNextPage}>
+      <Button 
+        className="mt-4"
+        size="sm"
+      onClick={handleLoadMore}
+       disabled={isFetchingNextPage}>
+        {isFetchingNextPage ? 'Loading more...' : 'Load More'}
+      </Button>
+</ShouldRender>
 </div>
 
 )
