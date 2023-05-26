@@ -1,21 +1,26 @@
 "use client"
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+
 import { type FC } from 'react';
 import ShouldRender from "../helpers/ShouldRender";
-
-
+import  dayjs from 'dayjs'
 import CustomReactMarkdown from "../helpers/ReactMarkdown";
 import EditBlog from "./EditBlog";
 import { useRouter } from "next/navigation";
+import { BlogType } from "@/db/tables/Blog";
+import { UserType } from "@/db/tables/User";
+import Image from "next/image";
 interface FetchSingleBlogProps {
-  blog: Blog | null;
+  blog: {
+    Blog: BlogType;
+    User: UserType;
+  }
   session: SafeSession | null;
 }
 
 const SingleBlogPage: FC<FetchSingleBlogProps> = ({blog,session}) => {
   const router = useRouter()
-
+  const date = new Date(blog?.Blog?.created_at);
+  const formattedDate = dayjs(date).format('DD MMMM YYYY');
   if(!blog) {
     router.push("/")
   }
@@ -24,11 +29,28 @@ const SingleBlogPage: FC<FetchSingleBlogProps> = ({blog,session}) => {
   return (
 
    <div className="w-full border-b border-my-neutral-200/30 dark:border-my-neutral-700/50 pb-4">
-   <ShouldRender if={session?.id === blog?.userId }>
-    <EditBlog data={blog}   />
+   <ShouldRender if={session?.id === blog?.Blog.userId }>
+    <EditBlog data={blog.Blog}   />
     </ShouldRender>
-    <h2 className="text-[24px] md:text-[28px] font-bold text-center px0:text-left text-my-neutral-950 dark:text-my-neutral-50">{blog?.title}
+    <h2 className="text-[24px] md:text-[28px] font-bold text-center px0:text-left text-my-neutral-950 dark:text-my-neutral-50">{blog?.Blog.title}
     </h2>
+
+    <div className='border-b border-my-neutral-200/30 dark:border-my-neutral-700/50 flex justify-start items-start gap-4 py-4 w-full'>
+      <Image
+        src={blog?.User?.image!}
+        alt={blog?.User?.name!}
+        width={44}
+        height={44}
+        className="rounded-full"
+      />
+    <div className=''>
+      <p className='text-my-primary-500 font-medium select-none '>
+        {blog?.User?.name!}
+      </p>
+      <p>{formattedDate}</p>
+
+    </div>
+    </div>
     
     <CustomReactMarkdown 
     className="
@@ -69,7 +91,7 @@ const SingleBlogPage: FC<FetchSingleBlogProps> = ({blog,session}) => {
       prose-th:text-my-neutral-700
       prose-em:text-my-neutral-700
       prose-td:text-my-neutral-700">
-        {blog?.body!}
+        {blog?.Blog.body!}
         </CustomReactMarkdown>
       
 

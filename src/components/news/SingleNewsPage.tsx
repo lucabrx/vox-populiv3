@@ -1,22 +1,53 @@
 import { NewsType } from '@/db/tables/News';
+import { UserType } from '@/db/tables/User';
 import { type FC } from 'react';
 import CustomReactMarkdown from '../helpers/ReactMarkdown';
 import ShouldRender from '../helpers/ShouldRender';
 import EditNews from './EditNews';
+import  dayjs from 'dayjs'
+import Image from 'next/image';
 
 interface SingleNewsPageProps {
-    news: NewsType | null
+    news: {
+      News: NewsType;
+      User: UserType;
+    }
     session: SafeSession | null
 }
 
 const SingleNewsPage: FC<SingleNewsPageProps> = ({news,session}) => {
+  const date = new Date(news?.News?.created_at);
+  const formattedDate = dayjs(date).format('DD MMMM YYYY');
+
   return (
-    <div className="w-full border-b border-my-neutral-200/30 dark:border-my-neutral-700/50 pb-4">
+    <div className="w-full border-b border-my-neutral-200/30 dark:border-my-neutral-700/50 pb-2">
       <ShouldRender if={session?.role === "NewsEditor"}>
-    <EditNews data={news}   />
+    <EditNews data={news.News}   />
     </ShouldRender>
-    <h2 className="text-[24px] md:text-[28px] font-bold text-center px0:text-left text-my-neutral-950 dark:text-my-neutral-50">{news?.title}
+   
+
+        <h2 className="text-[24px] md:text-[28px] font-bold text-left  px0:text-left text-my-neutral-950 dark:text-my-neutral-50 
+    ">{news?.News?.title}
     </h2>
+
+    <div className='border-b border-my-neutral-200/30 dark:border-my-neutral-700/50 flex justify-start items-start gap-4 py-4 w-full'>
+      <Image
+        src={news?.User?.image!}
+        alt={news?.User?.name!}
+        width={44}
+        height={44}
+        className="rounded-full"
+      />
+    <div className=''>
+      <p className='text-my-primary-500 font-medium select-none '>
+        {news?.User?.name!}
+      </p>
+      <p>{formattedDate}</p>
+
+    </div>
+    </div>
+ 
+
 <CustomReactMarkdown 
     className="
     prose 
@@ -56,7 +87,7 @@ const SingleNewsPage: FC<SingleNewsPageProps> = ({news,session}) => {
       prose-th:text-my-neutral-700
       prose-em:text-my-neutral-700
       prose-td:text-my-neutral-700">
-        {news?.body!}
+        {news?.News?.body!}
         </CustomReactMarkdown>
 </div>
 )

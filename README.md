@@ -18,7 +18,8 @@
 - [ ] User can register multiple emails it wont be senden to the database but it wont send an error either.
 
 ## 4. TODO
+- [ ] Add a  story categories and sort it by categories
+- [ ] Mobile Menu to close when we select link
 - [ ] Add Comments,Delete Comments, Read Comments, Edit Comments
 - [ ] Add Blog to User Page 
-- [ ] Mobile Menu to close when we select link
-- [ ] Add a news and story categories and sort it by categories
+

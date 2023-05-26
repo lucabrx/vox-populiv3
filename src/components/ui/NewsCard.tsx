@@ -5,7 +5,7 @@ import { type FC } from 'react';
 import  dayjs from 'dayjs'
 import relativeFormat from 'dayjs/plugin/relativeTime'
 import Badge from './Badge';
-dayjs.extend(relativeFormat) // use plugin
+dayjs.extend(relativeFormat) 
 
 interface NewsCardProps {
   data: SafeNews
@@ -16,7 +16,7 @@ const NewsCard: FC<NewsCardProps> = ({data}) => {
     const createdDate = dayjs(data?.News.created_at).fromNow()
 
   return (
-<div className='bg-white dark:bg-my-neutral-900 rounded-lg  min-w-[320px] max-w-[328px] xs:max-w-[343px] w-full relative ss:max-w-[420px] xs:max-h-[256px] ss:max-h-[236px] md:max-w-[360px] lg:max-w-[320px] lg:max-h-[260px]  px0:max-w-[332px] pc:max-w-[350px] pc2:max-w-[360px]'> 
+<div className='bg-white dark:bg-my-neutral-900 rounded-lg  min-w-[320px] max-w-[328px] xs:max-w-[343px] w-full relative ss:max-w-[420px] xs:max-h-[256px] ss:max-h-[252px] md:max-w-[360px] lg:max-w-[320px] lg:max-h-[260px]  px0:max-w-[332px] pc:max-w-[350px] pc2:max-w-[360px]'> 
   <Badge 
   className='absolute top-2 right-2'
   art={data?.News?.category as "Tech" | "Sport" || "Lifestyle" || "World" }>{data.News.category}

@@ -1,3 +1,4 @@
+import { InferModel } from "drizzle-orm";
 import { mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
 
 
@@ -11,3 +12,4 @@ export const Blog = mysqlTable("Blog", {
     userId: varchar("userId", {length: 191}).notNull()
 })
 
+export type BlogType = InferModel<typeof Blog, "select">;
