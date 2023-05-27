@@ -1,6 +1,6 @@
 "use client"
 import { type FC } from 'react';
-import { Home, MenuSquare, Newspaper, Pen, User } from 'lucide-react';
+import { Bold, Home, MenuSquare, Newspaper, Pen, User } from 'lucide-react';
 import NavigationLink from '../ui/NavigationLink';
 import ActionLink from '../ui/ActionLink';
 import ShouldRender from '../helpers/ShouldRender';
@@ -19,6 +19,11 @@ const navigationLink = [
         path: '/news',
         icon: Newspaper,
         title: 'News'
+    },
+    {
+        path: '/blog',
+        icon: Bold,
+        title: 'Blogs'
     },
     {
         path: '/user',

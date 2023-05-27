@@ -1,3 +1,4 @@
+import { BlogType } from "@/db/tables/Blog";
 import { NewsType } from "@/db/tables/News";
 import { UserType } from "@/db/tables/User"
 
@@ -7,3 +8,7 @@ type SafeNews = {
     News : NewsType
 }
 
+type SafeBlog = {
+    User: UserType;
+    Blog : BlogType
+}

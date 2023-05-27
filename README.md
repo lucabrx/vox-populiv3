@@ -18,7 +18,7 @@
 - [ ] User can register multiple emails it wont be senden to the database but it wont send an error either.
 
 ## 4. TODO
-- [ ] Mobile Menu to close when we select link
+- [ ] Add Search Functionality
 - [ ] Add Blog to User Page 
-- [ ] Add a  story categories and sort it by categories
+
 

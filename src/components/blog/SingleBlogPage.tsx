@@ -33,10 +33,18 @@ const SingleBlogPage: FC<FetchSingleBlogProps> = ({blog,session}) => {
    <ShouldRender if={session?.id === blog?.Blog.userId }>
     <EditBlog data={blog.Blog}   />
     </ShouldRender>
-    <h2 className="text-[24px] md:text-[28px] font-bold text-center px0:text-left text-my-neutral-950 dark:text-my-neutral-50">{blog?.Blog.title}
+    <h2 className="text-[24px] md:text-[28px] font-bold text-center px0:text-left text-my-neutral-950 dark:text-my-neutral-50 py-3 pt-5">
+    {blog?.Blog.title}
     </h2>
-
-    <div className='border-b border-my-neutral-200/30 dark:border-my-neutral-700/50 flex justify-start items-start gap-4 py-4 w-full'>
+  
+   <Image src ={blog?.Blog.imageSrc!}
+    alt={blog?.Blog.title!}
+    width={600}
+    height={300}
+className="rounded-md aspect-[16/6] w-full"
+    />
+  
+    <div className='border-b border-my-neutral-200/30 dark:border-my-neutral-700/50 flex justify-end items-start gap-4 py-4 w-full'>
       <Link href={`/user/${blog?.User?.id}`}>
       <Image
         src={blog?.User?.image!}

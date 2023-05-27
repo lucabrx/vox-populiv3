@@ -36,8 +36,8 @@ export default async function RootLayout({
         <Navbar session={session} />
         <Sidebar session={session}/>
         </Hydrate>
-        <div className='min-h-[calc(100vh-138px)] md:min-h-[calc(100vh-85px)] w-full flex justify-center px0:pl-[210px] lpc:pl-0'>
-        <div className='min-h-[calc(100vh-138px)] md:min-h-[calc(100vh-85px)]  w-full max-w-[1186px] px-4 pc:px-6 pc:w-[1186px] flex flex-col items-center justify-start'>
+        <div className='min-h-[calc(100vh-154px)] md:min-h-[calc(100vh-97px)] w-full flex justify-center px0:pl-[210px] lpc:pl-0'>
+        <div className='min-h-[calc(100vh-154px)] md:min-h-[calc(100vh-97px)]  w-full max-w-[1186px] px-4 pc:px-6 pc:w-[1186px] flex flex-col items-center justify-start'>
         {children}
         </div>
         </div>

@@ -23,7 +23,7 @@ const SingleNewsPage: FC<SingleNewsPageProps> = ({news,session}) => {
   return (
     <div className="w-full border-b border-my-neutral-200/30 dark:border-my-neutral-700/50 pb-2">
       <ShouldRender if={session?.role === "NewsEditor"}>
-    <EditNews data={news.News}   />
+    <EditNews data={news?.News}   />
     </ShouldRender>
    
 
