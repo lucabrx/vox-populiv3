@@ -10,7 +10,8 @@ export const News = mysqlTable("News", {
     description: varchar("description", {length: 256}).notNull(),
     created_at: timestamp("created_at").notNull().defaultNow(),
     updated_at: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
-    userId: varchar("userId", {length: 191}).notNull()
+    userId: varchar("userId", {length: 191}).notNull(),
+    imageSrc: varchar("imageSrc", {length: 191}),
 }, (table) => ({
     categoryIndex: index("news__category__idx").on(table.category),
 }

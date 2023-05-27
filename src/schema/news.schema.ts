@@ -17,6 +17,7 @@ export const CreateNewsSchema = z.object({
     body : 
     z.string()
     .min(300, "Minimal 100 characters long"),
+    imageSrc: z.string(),
  })
 export type CreateNewsType = TypeOf<typeof CreateNewsSchema>
 

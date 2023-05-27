@@ -88,9 +88,9 @@ const WriteStory: FC<WriteStoryProps> = ({}) => {
     </label> 
    <select 
    className='p-2 rounded-md bg-zinc-300/30 dark:bg-zinc-700/30 py-2 px-4 flex outline-none focus:ring-1 focus:ring-my-primary-500' {...register("category")}>
-        <option value="Tech">Story of the Month</option>
-        <option value="Sport">Person of the Month</option>
-        <option value="World">Country of the Month</option>
+        <option value="Story">Story of the Month</option>
+        <option value="Person">Person of the Month</option>
+        <option value="Country">Country of the Month</option>
     </select>
    </Field>
  

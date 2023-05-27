@@ -22,7 +22,7 @@ const NewsHome: FC = ({}) => {
             params: {
               category: category,
               offset: pageParam,
-              limit: 1
+              limit: 9
             },
           });
           return response.data;

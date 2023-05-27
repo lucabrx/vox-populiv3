@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { nanoid } from 'nanoid';
+import ImageUpload from '../ImageUpload';
 
 interface WriteNewsProps {
   
@@ -20,9 +21,15 @@ const WriteNews: FC<WriteNewsProps> = ({}) => {
     const queryClient = useQueryClient()
     const router = useRouter()
 
-    const {setValue,reset,register,control,handleSubmit,formState: {errors}} = useForm<CreateNewsType>({
+    const {setValue,watch,reset,register,control,handleSubmit,formState: {errors}} = useForm<CreateNewsType>({
         resolver: zodResolver(CreateNewsSchema),
+        defaultValues: {
+            imageSrc: ""
+        }
     })
+
+    const imageSrc = watch("imageSrc")
+
 
     const createNews = useMutation({
         mutationFn: (data: CreateNewsType) => axios.post("/api/news/create-news", data),
@@ -94,6 +101,11 @@ const WriteNews: FC<WriteNewsProps> = ({}) => {
     </label> 
     <MarkdownEditor control={control} name="body" />
     </Field>
+
+    <ImageUpload
+    value={imageSrc!}
+    onChange={(value) => setValue("imageSrc", value)}
+    />
  
     <Button className="max-w-[160px] w-full self-end" size="md" art="cta">Create News</Button>
     </form>

@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
     const newNews: CreateNewsType = await request.json()
-    const {body,category,description,id,title} = newNews
+    const {body,category,description,id,title,imageSrc} = newNews
 
     if(!body || !category || !description || !id || !title){
         return NextResponse.json({message: "All fields are required"}, {status: 400})
@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
         category,
         description,
         userId: currentUser.id,
+        imageSrc
     })
 
     return NextResponse.json({

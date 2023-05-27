@@ -31,6 +31,13 @@ const SingleNewsPage: FC<SingleNewsPageProps> = ({news,session}) => {
     ">{news?.News?.title}
     </h2>
 
+    <Image src ={news?.News.imageSrc!}
+    alt={news?.News.title!}
+    width={600}
+    height={300}
+className="rounded-md aspect-[16/6] w-full"
+    />
+
     <div className='border-b border-my-neutral-200/30 dark:border-my-neutral-700/50 flex justify-start items-start gap-4 py-4 w-full'>
       <Link href={`/user/${news?.User?.id}`}>
       <Image

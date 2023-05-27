@@ -17,8 +17,7 @@ if(category === "all" ) {
     const allNews = await db
     .select()
     .from(News)
-    .offset(Number(offset) - 1)
-    .offset(Number(offset))
+    .offset(Number(offset) * Number(limit))
     .limit(Number(limit))
     .innerJoin(User, eq(User.id,News.userId))
     .orderBy(desc(News.created_at))
