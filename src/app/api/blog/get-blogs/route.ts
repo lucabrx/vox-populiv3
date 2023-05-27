@@ -12,7 +12,7 @@ const offset = new URL(request.nextUrl).searchParams.get("offset")
     const allNews = await db
     .select()
     .from(Blog)
-    .offset(Number(offset) * Number(limit))
+    .offset(Number(offset))
     .limit(Number(limit))
     .innerJoin(User, eq(User.id,Blog.userId))
     .orderBy(desc(Blog.created_at))

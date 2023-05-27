@@ -33,7 +33,7 @@ const BlogHome: FC = ({}) => {
         queryFn: fetchBlog,
         getNextPageParam: (lastPage, allPages) => {
           const lastPageLength = lastPage.length;
-          return lastPageLength > 0 ? allPages.length * 1 : undefined;
+          return lastPageLength > 0 ? allPages.length * 9 : undefined;
         },
         
     })

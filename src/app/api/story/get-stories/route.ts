@@ -12,7 +12,7 @@ const offset = new URL(request.nextUrl).searchParams.get("offset")
     const allStories = await db
     .select()
     .from(Story)
-    .offset(Number(offset) * Number(limit))
+    .offset(Number(offset))
     .limit(Number(limit))
     .innerJoin(User, eq(User.id,Story.userId))
     .orderBy(desc(Story.created_at))
