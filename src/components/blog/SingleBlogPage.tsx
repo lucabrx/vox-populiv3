@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { BlogType } from "@/db/tables/Blog";
 import { UserType } from "@/db/tables/User";
 import Image from "next/image";
+import Link from 'next/link';
 interface FetchSingleBlogProps {
   blog: {
     Blog: BlogType;
@@ -36,17 +37,21 @@ const SingleBlogPage: FC<FetchSingleBlogProps> = ({blog,session}) => {
     </h2>
 
     <div className='border-b border-my-neutral-200/30 dark:border-my-neutral-700/50 flex justify-start items-start gap-4 py-4 w-full'>
+      <Link href={`/user/${blog?.User?.id}`}>
       <Image
         src={blog?.User?.image!}
         alt={blog?.User?.name!}
         width={44}
         height={44}
-        className="rounded-full"
+        className="rounded-full cursor-pointer"
       />
+      </Link>
     <div className=''>
-      <p className='text-my-primary-500 font-medium select-none '>
+    <Link href={`/user/${blog?.User?.id}`}>
+      <p className='text-my-primary-500 font-medium cursor-pointer'>
         {blog?.User?.name!}
       </p>
+      </Link>
       <p>{formattedDate}</p>
 
     </div>

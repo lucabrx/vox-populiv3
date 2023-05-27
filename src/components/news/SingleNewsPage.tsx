@@ -6,6 +6,7 @@ import ShouldRender from '../helpers/ShouldRender';
 import EditNews from './EditNews';
 import  dayjs from 'dayjs'
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface SingleNewsPageProps {
     news: {
@@ -31,6 +32,7 @@ const SingleNewsPage: FC<SingleNewsPageProps> = ({news,session}) => {
     </h2>
 
     <div className='border-b border-my-neutral-200/30 dark:border-my-neutral-700/50 flex justify-start items-start gap-4 py-4 w-full'>
+      <Link href={`/user/${news?.User?.id}`}>
       <Image
         src={news?.User?.image!}
         alt={news?.User?.name!}
@@ -38,10 +40,13 @@ const SingleNewsPage: FC<SingleNewsPageProps> = ({news,session}) => {
         height={44}
         className="rounded-full"
       />
+      </Link>
     <div className=''>
+    <Link href={`/user/${news?.User?.id}`}>
       <p className='text-my-primary-500 font-medium select-none '>
         {news?.User?.name!}
       </p>
+      </Link>
       <p>{formattedDate}</p>
 
     </div>

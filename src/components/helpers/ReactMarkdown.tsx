@@ -12,6 +12,7 @@ const CustomReactMarkdown: FC<ReactMarkdownProps> = ({ children, className }) =>
   return (
     <ReactMarkdown
       className={`${className} 
+      
       prose 
       dark:prose-headings:text-my-neutral-50
         prose-headings:text-my-neutral-950
@@ -31,7 +32,7 @@ const CustomReactMarkdown: FC<ReactMarkdownProps> = ({ children, className }) =>
         dark:prose-th:text-my-neutral-200
         dark:prose-em:text-my-neutral-200
         dark:prose-td:text-my-neutral-200
-       
+         
   
         prose-p:text-my-neutral-700
         prose-blockquote:text-my-neutral-700

@@ -8,6 +8,7 @@ import { UserType } from '@/db/tables/User';
 import Image from 'next/image';
 import  dayjs from 'dayjs'
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface SingeStoryPageProps {
   story: {
@@ -34,6 +35,7 @@ const SingeStoryPage: FC<SingeStoryPageProps> = ({story,session}) => {
     </h2>
 
     <div className='border-b border-my-neutral-200/30 dark:border-my-neutral-700/50 flex justify-start items-start gap-4 py-4 w-full'>
+      <Link href={`/user/${story?.User?.id}`}>
       <Image
         src={story?.User?.image!}
         alt={story?.User?.name!}
@@ -41,10 +43,13 @@ const SingeStoryPage: FC<SingeStoryPageProps> = ({story,session}) => {
         height={44}
         className="rounded-full"
       />
+      </Link>
     <div className=''>
+    <Link href={`/user/${story?.User?.id}`}>
       <p className='text-my-primary-500 font-medium select-none '>
         {story?.User?.name!}
       </p>
+      </Link>
       <p>{formattedDate}</p>
 
     </div>
