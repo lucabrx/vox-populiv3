@@ -15,6 +15,7 @@ export const CreateBlogSchema = z.object({
     body : 
     z.string()
     .min(300, "Minimal 100 characters long"),
+    imageSrc: z.string().optional()
  })
 export type CreateBlogType = TypeOf<typeof CreateBlogSchema>
 

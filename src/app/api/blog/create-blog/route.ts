@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
     const blogBody: CreateBlogType = await request.json();
-    const { body,title,description,id } = blogBody;
+    const { body,title,description,id, imageSrc } = blogBody;
     const currentUser = await getCurrentSession();
     
 if (!currentUser) {
@@ -24,7 +24,8 @@ const blog = await db
         title,
         body,
         userId: currentUser.id,
-        description 
+        description ,
+        imageSrc : imageSrc
     })
     
     return NextResponse.json(blog)

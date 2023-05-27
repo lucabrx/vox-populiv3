@@ -12,6 +12,7 @@ import { toast } from "react-hot-toast";
 import { nanoid } from 'nanoid';
 import { useRouter } from 'next/navigation';
 import MarkdownEditor from '../helpers/MarkdownEditor';
+import ImageUpload from '../ImageUpload';
 interface WriteBlogProps {
   
 }
@@ -19,9 +20,17 @@ interface WriteBlogProps {
 const WriteBlog: FC<WriteBlogProps> = ({}) => {
     const router = useRouter()
     const queryClient = useQueryClient()
-    const { register, handleSubmit,reset, formState: {errors}, setValue, control } = useForm<CreateBlogType>({
+    const { register,watch, handleSubmit,reset, formState: {errors}, setValue, control } = useForm<CreateBlogType>({
         resolver: zodResolver(CreateBlogSchema),
+        defaultValues: {
+            imageSrc : "",
+        }
     });
+
+    const imageSrc = watch("imageSrc")
+
+   
+
 
     const createBlog = useMutation({
         mutationFn: (data: CreateBlogType) => 
@@ -91,6 +100,11 @@ const WriteBlog: FC<WriteBlogProps> = ({}) => {
        <p className="text-red-500 text-sm">{errors.body?.message}</p>
    </ShouldRender>
    </Field>
+
+   <ImageUpload
+    value={imageSrc!}
+    onChange={(value) => setValue("imageSrc", value)}
+    />
 
    <Button className="max-w-[140px] w-full self-end" size="md" art="cta">Create Blog</Button>
    </form>

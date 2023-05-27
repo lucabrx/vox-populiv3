@@ -9,7 +9,8 @@ export const Blog = mysqlTable("Blog", {
     description: varchar("description", {length: 256}).notNull(),
     created_at: timestamp("created_at").notNull().defaultNow(),
     updated_at: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
-    userId: varchar("userId", {length: 191}).notNull()
+    userId: varchar("userId", {length: 191}).notNull(),
+    imageSrc: varchar("imageSrc", {length: 191})
 })
 
 export type BlogType = InferModel<typeof Blog, "select">;
