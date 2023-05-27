@@ -34,6 +34,13 @@ const SingeStoryPage: FC<SingeStoryPageProps> = ({story,session}) => {
     <h2 className="text-[24px] md:text-[28px] font-bold text-center px0:text-left text-my-neutral-950 dark:text-my-neutral-50">{story?.Story?.title}
     </h2>
 
+    <Image src ={story?.Story.imageSrc!}
+    alt={story?.Story.title!}
+    width={600}
+    height={300}
+className="rounded-md aspect-[16/6] w-full"
+    />
+
     <div className='border-b border-my-neutral-200/30 dark:border-my-neutral-700/50 flex justify-start items-start gap-4 py-4 w-full'>
       <Link href={`/user/${story?.User?.id}`}>
       <Image

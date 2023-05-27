@@ -1,4 +1,4 @@
-import { SafeBlog, SafeNews } from '@/types/joinedNews';
+import { SafeNews, SafeStory } from '@/types/joinedNews';
 import Image from 'next/image';
 import Link from 'next/link';
 import { type FC } from 'react';
@@ -8,34 +8,37 @@ import Badge from './Badge';
 dayjs.extend(relativeFormat) 
 
 interface NewsCardProps {
-  data: SafeBlog
+  data: SafeStory
 }
 
-const BlogCard: FC<NewsCardProps> = ({data}) => {
-    const cutDesc = data?.Blog.description.slice(0, 100)
-    const createdDate = dayjs(data?.Blog.created_at).fromNow()
+const StoryCard: FC<NewsCardProps> = ({data}) => {
+    const cutDesc = data?.Story.description.slice(0, 100)
+    const createdDate = dayjs(data?.Story.created_at).fromNow()
 
   return (
 <div className='bg-white dark:bg-my-neutral-900 rounded-lg  min-w-[320px] max-w-[328px] xs:max-w-[343px] w-full relative ss:max-w-[420px] xs:max-h-[256px] ss:max-h-[252px] md:max-w-[360px] lg:max-w-[320px] lg:max-h-[260px]  px0:max-w-[332px] pc:max-w-[350px] pc2:max-w-[360px]'> 
-  
+  <Badge 
+  className='absolute top-2 right-2'
+  art="Story">{data.Story.category}
+  </Badge>
 
 <div className='mt-3 px-4  max-w-[83%] w-full'>
-<Link href={`/blog/${data.Blog.id}`} className='font-semibold text-xl text-my-neutral-950 dark:text-my-neutral-50 hover:text-my-primary-500 hover:dark:text-my-primary-500 duration-300 transition-all'>
-{data.Blog.title}
+<Link href={`/story/${data.Story.id}`} className='font-semibold text-xl text-my-neutral-950 dark:text-my-neutral-50 hover:text-my-primary-500 hover:dark:text-my-primary-500 duration-300 transition-all'>
+{data.Story.title}
 </Link>
 </div>
 
 
 <div className='pb-3'>
 <div className='w-full grid grid-cols-2 place-items-start gap-3 items-start justify-items-start mt-3 px-3'>
-    <Link  href={`/blog/${data.Blog.id}`} className='relative h-full w-full px0:w-[148px] lg:h-[120px]'>
+    <Link href={`/story/${data.Story.id}`} className='relative h-full w-full px0:w-[148px] lg:h-[120px]'>
         <Image 
         fill
         sizes='100%'
-        src={data?.Blog?.imageSrc!}
-        alt={data?.Blog?.title!}
+        src={data?.Story?.imageSrc!}
+        alt={data?.Story?.title!}
         priority
-        className='rounded-md object-cover'
+        className='rounded-md'
         />
     </Link>
     <p className='text-[14px] font-medium leading-[20px]'>
@@ -56,7 +59,7 @@ alt={data?.User?.name!}
 />
 </div>
 <Link 
-href={`/user/${data?.Blog.userId}`}
+href={`/user/${data?.Story.userId}`}
 className='text-my-primary-500 text-[16px] font-medium'>{data?.User.name}
 </Link>
 
@@ -72,4 +75,4 @@ className='text-my-primary-500 text-[16px] font-medium'>{data?.User.name}
 )
 }
 
-export default BlogCard
+export default StoryCard

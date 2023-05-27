@@ -26,6 +26,11 @@ const navigationLink = [
         title: 'Blogs'
     },
     {
+        path: '/story',
+        icon: MenuSquare,
+        title: 'Stories'
+    },
+    {
         path: '/user',
         icon: User,
         title: 'Profile'

@@ -10,6 +10,7 @@ const badgeVariants = cva( "h-[24px] px-2 rounded-[4px] text-[12px] font-medium 
             Sport: "bg-green-50 text-green-500 dark:bg-green-900 dark:text-green-300",
             Lifestyle: "bg-yellow-50 text-yellow-600 dark:bg-yellow-900 dark:text-yellow-300",
             World: "bg-red-50 text-red-500 dark:bg-red-900 dark:text-red-300",
+            Story: "h-[24px] px-2 rounded-[4px] text-[12px] font-medium  shadow-sm flex justify-center items-center bg-my-primary-500 text-my-neutral-50"
            
         },
     },

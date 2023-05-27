@@ -11,6 +11,8 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { nanoid } from 'nanoid';
+import { CreateStorySchema, CreateStoryType } from '@/schema/story.schema';
+import ImageUpload from '../ImageUpload';
 
 interface WriteStoryProps {
   
@@ -20,12 +22,18 @@ const WriteStory: FC<WriteStoryProps> = ({}) => {
     const queryClient = useQueryClient()
     const router = useRouter()
 
-    const {setValue,reset,register,control,handleSubmit,formState: {errors}} = useForm<CreateNewsType>({
-        resolver: zodResolver(CreateNewsSchema),
+    const {setValue,reset,watch,register,control,handleSubmit,formState: {errors}} = useForm<CreateStoryType>({
+        resolver: zodResolver(CreateStorySchema),
+        defaultValues: {
+            imageSrc: ""
+        }
     })
 
+    const imageSrc = watch("imageSrc")
+
+
     const createStory = useMutation({
-        mutationFn: (data: CreateNewsType) => axios.post("/api/story/create-news", data),
+        mutationFn: (data: CreateStoryType) => axios.post("/api/story/create-story", data),
         onSuccess: () => {
             toast.success("Create story successfully")
             reset()
@@ -46,7 +54,7 @@ const WriteStory: FC<WriteStoryProps> = ({}) => {
 
    
 
-    const onSubmit = (values: CreateNewsType) => {
+    const onSubmit = (values: CreateStoryType) => {
         createStory.mutate(values)
     }
   return (
@@ -93,6 +101,11 @@ const WriteStory: FC<WriteStoryProps> = ({}) => {
     </label> 
     <MarkdownEditor control={control} name="body" />
     </Field>
+
+    <ImageUpload
+    value={imageSrc!}
+    onChange={(value) => setValue("imageSrc", value)}
+    />
  
     <Button className="max-w-[160px] w-full self-end" size="md" art="cta">Create News</Button>
     </form>

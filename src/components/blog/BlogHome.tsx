@@ -1,8 +1,6 @@
 "use client"
-import { BlogType } from '@/db/tables/Blog';
-import { UserType } from '@/db/tables/User';
 import { SafeBlog } from '@/types/joinedNews';
-import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import {  Fragment, type FC } from 'react';
 import SkeletonPost from '../ui/SkeletonPost';
@@ -12,8 +10,8 @@ import BlogCard from '../ui/BlogCard';
 
 
 const BlogHome: FC = ({}) => {
-    const queryClient = useQueryClient()
-    const querykey = ['news', 'all']
+
+    const querykey = ['blog', 'all']
 
     const fetchBlog = async ({pageParam = 0}) => {
         try {

@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
     const storyBody: CreateStoryType = await request.json();
-    const { body, title, description, category, id } = storyBody;
+    const { body, title, description, category, id, imageSrc } = storyBody;
     const currentUser = await getCurrentSession()
 
     if(!body || !category || !description || !id || !title){
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
         return NextResponse.json({message: "You are not allowed to create news"}, {status: 403})
     }
     
-    const news = await db
+    await db
     .insert(Story)
     .values({
         id,
@@ -30,6 +30,7 @@ export async function POST(request: Request) {
         category,
         description,
         userId: currentUser.id,
+        imageSrc : imageSrc
     })
 
     return NextResponse.json({
