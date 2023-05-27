@@ -1,32 +1,31 @@
 import { Comment } from "@/db"
 import { getCurrentSession } from "@/fetching-hooks/getSession"
 import { db } from "@/lib/db"
-import { updateCommentType } from "@/schema/blogComment.schema"
-import { eq } from "drizzle-orm"
+import { createCommentType } from "@/schema/storyComment.schema"
+import { nanoid } from "nanoid"
 import { NextResponse } from "next/server"
 
 export async function POST(request: Request) {
-    const commentBody: updateCommentType = await request.json()
-    const { body,userId,commentId } = commentBody
+    const commentBody: createCommentType = await request.json()
+    const { storyId,body } = commentBody
     const session = await getCurrentSession()
+
     if(!session) {
         return new Response("Unauthorized", { status: 401 })
     }
-    if(!commentId || !body) {
-        return new Response("Unauthorized", { status: 401 })
-    }
-    if(session.id !== userId) {
+    if(!storyId || !body) {
         return new Response("Unauthorized", { status: 401 })
     }
 
     await db
-    .update(Comment)
-    .set({
+    .insert(Comment)
+    .values({
+        storyId,
         body,
+        userId: session.id,
+        id: nanoid(),
     })
-    .where(eq(Comment.id, commentId))
    
    return NextResponse.json({ message: "Comment created successfully" })
 }
-
 

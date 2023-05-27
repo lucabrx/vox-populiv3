@@ -1,7 +1,7 @@
 import { Comment } from "@/db"
 import { getCurrentSession } from "@/fetching-hooks/getSession"
 import { db } from "@/lib/db"
-import { updateCommentType } from "@/schema/blogComment.schema"
+import { updateCommentType } from "@/schema/storyComment.schema"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
@@ -9,6 +9,7 @@ export async function POST(request: Request) {
     const commentBody: updateCommentType = await request.json()
     const { body,userId,commentId } = commentBody
     const session = await getCurrentSession()
+  
     if(!session) {
         return new Response("Unauthorized", { status: 401 })
     }
