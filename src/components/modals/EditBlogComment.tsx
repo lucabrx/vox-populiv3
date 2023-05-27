@@ -4,7 +4,7 @@ import { useRef, type FC, useState, useCallback, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-import {  updateCommentType, updateCommentSchema } from '@/schema/comment.schema';
+import {  updateCommentType, updateCommentSchema } from '@/schema/blogComment.schema';
 import Field from '../ui/Field';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';

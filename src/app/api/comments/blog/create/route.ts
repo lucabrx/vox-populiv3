@@ -1,7 +1,7 @@
 import { Comment } from "@/db"
 import { getCurrentSession } from "@/fetching-hooks/getSession"
 import { db } from "@/lib/db"
-import { createCommentType } from "@/schema/comment.schema"
+import { createCommentType } from "@/schema/blogComment.schema"
 import { nanoid } from "nanoid"
 import { NextResponse } from "next/server"
 

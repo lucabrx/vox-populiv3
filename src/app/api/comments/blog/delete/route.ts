@@ -1,7 +1,7 @@
 import { Comment } from "@/db";
 import { getCurrentSession } from "@/fetching-hooks/getSession";
 import { db } from "@/lib/db";
-import { deleteCommentType } from "@/schema/comment.schema";
+import { deleteCommentType } from "@/schema/blogComment.schema";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 

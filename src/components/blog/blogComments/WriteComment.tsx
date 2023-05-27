@@ -3,7 +3,7 @@ import Button from '@/components/ui/Button';
 import { useState, type FC, useCallback, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createCommentSchema,createCommentType } from '@/schema/comment.schema';
+import { createCommentSchema,createCommentType } from '@/schema/blogComment.schema';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
