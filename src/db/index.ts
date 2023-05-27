@@ -5,6 +5,7 @@ import { VerificationToken } from "./tables/VerificationToken";
 import { Blog } from "./tables/Blog";
 import { News } from "./tables/News";
 import { Story } from "./tables/Story";
+import { Comment } from "./tables/Comment";
 
 export  {
     Account,
@@ -14,4 +15,5 @@ export  {
     Blog,
     News,
     Story,
+    Comment
 };
