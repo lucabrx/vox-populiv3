@@ -21,7 +21,6 @@ const enabledPlugins = [
   "header",
   "font-bold",
   "font-italic",
-  "font-underline",
   "font-strikethrough",
   "list-unordered",
   "list-ordered",
@@ -53,6 +52,14 @@ const MarkdownEditor: React.FC<Props> = ({
     html: true,
     linkify: true,
     typographer: true,
+    highlight: function (str, lang) {
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          return hljs.highlight(lang, str).value;
+        } catch (__) {}
+      }
+      return ""; // use external default escaping
+    },
   })
     .use(insert)
     .use(taskLists);
