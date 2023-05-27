@@ -10,19 +10,20 @@ import { useClickOutside } from '@/hooks/useClickOutside';
 import ShouldRender from '../helpers/ShouldRender';
 import MobSidebar from './MobSidebar';
 import  useLoginModal  from '@/hooks/useLoginModal';
+import useMobileMenu from '@/hooks/useMobileMenu';
 
 interface MobileNavbarItemsProps {
   session: SafeSession | null;
 }
 
 const MobileNavbarItems: FC<MobileNavbarItemsProps> = ({session}) => {
-  const [openMenu, setOpenMenu] = useState(false)
+  const mobileMenu = useMobileMenu()
   const { setTheme, resolvedTheme } = useTheme()
   const menuRef = useRef<HTMLDivElement>(null);
   const loginModal = useLoginModal()
 
-    useLockOverflow(openMenu);
-    useClickOutside(menuRef, () => setOpenMenu(false));
+    useLockOverflow(mobileMenu.isOpen);
+    useClickOutside(menuRef, mobileMenu.close);
 
   return (
 <div className='flex px0:hidden gap-3 justify-center items-center'>
@@ -50,14 +51,14 @@ onClick={() => setTheme('dark')} />
 </IconContainer>
 
 <IconContainer
-onClick={() => setOpenMenu(true)}>
+onClick={mobileMenu.open}>
 <Menu size={32} className='text-my-neutral-950 dark:text-my-neutral-50' />
 </IconContainer>
-<ShouldRender if={openMenu}>
+<ShouldRender if={mobileMenu.isOpen}>
  
       <MobSidebar 
       session={session}
-      disableAction={() => setOpenMenu(false)}
+      disableAction={mobileMenu.close}
       ref={menuRef} />
 </ShouldRender>
 </div>

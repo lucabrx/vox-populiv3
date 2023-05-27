@@ -1,8 +1,9 @@
 "use client"
 import { Icon } from 'lucide-react';
-import { type FC } from 'react';
+import { useCallback, type FC } from 'react';
 import IconContainer from '../ui/IconContainer';
 import { usePathname, useRouter } from 'next/navigation';
+import useMobileMenu from '@/hooks/useMobileMenu';
  
 interface NavigationLinkProps {
   path: string;
@@ -13,11 +14,12 @@ interface NavigationLinkProps {
 const NavigationLink: FC<NavigationLinkProps> = ({path,icon: Icon,title}) => {
 const pathname = usePathname();
 const router = useRouter();
+const mobileMenu = useMobileMenu();
 
-const clickAction = () => {
+const clickAction = useCallback(() => {
+  mobileMenu.close();
   router.push(path);
-
-}
+}, [router, path, mobileMenu])
 
   return (
 <div 

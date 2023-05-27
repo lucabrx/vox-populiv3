@@ -1,8 +1,9 @@
 "use client"
-import { type FC } from 'react';
+import { useCallback, type FC } from 'react';
 import IconContainer from '../ui/IconContainer';
 import { Icon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import useMobileMenu from '@/hooks/useMobileMenu';
 
 
 
@@ -15,9 +16,11 @@ interface ActionLinkProps {
 
 const ActionLink: FC<ActionLinkProps> = ({icon: Icon,title,path}) => {
   const router = useRouter();
-  const handleClick = () => {
+  const mobileMenu = useMobileMenu();
+  const handleClick = useCallback(() => {
+    mobileMenu.close();
       router.push(path);
-  }
+  }, [router, path, mobileMenu])
   return (
 <button
 onClick={handleClick}
