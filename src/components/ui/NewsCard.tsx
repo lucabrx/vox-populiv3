@@ -38,6 +38,7 @@ const NewsCard: FC<NewsCardProps> = ({data}) => {
         src={data?.News?.imageSrc!}
         alt="mockup"
         priority
+        className='rounded-md'
         />
     </div>
     <p className='text-[14px] font-medium leading-[20px]'>
