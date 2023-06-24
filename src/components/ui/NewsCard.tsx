@@ -35,7 +35,7 @@ const NewsCard: FC<NewsCardProps> = ({data}) => {
         <Image 
         fill
         sizes='100%'
-        src="/img-mockup.png"
+        src={data?.News?.imageSrc!}
         alt="mockup"
         priority
         />
